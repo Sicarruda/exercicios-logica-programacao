@@ -4,16 +4,23 @@ var lista = [120,655,26,85,323,65,778,12,10,5];
 
 
 function inverterLista(array){
-    var index = array.length; 
-    for(var i = 0; i < index; i++){
-        var elemento = array.length;
-        elemento = elemento -1;
+    var elemento = 0;
+    var listaFinal = [];
+    var a = 0;
+    for(var i = 0; i < array.length; i++){    
+        a = a + 1;
+        elemento = array.length - a;
         var ultimoElemento = array[elemento];
-        array.push(ultimoElemento);
-        array.pop();
+        listaFinal.push(ultimoElemento);
     }
+    return listaFinal;
 }
 
-inverterLista(lista);
+lista = inverterLista(lista);
+console.log (lista);
 
-console.log(lista);
+
+
+
+
+
