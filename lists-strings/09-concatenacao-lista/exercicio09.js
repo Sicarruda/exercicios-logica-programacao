@@ -1,8 +1,8 @@
 //Escreva uma função que concatene duas listas. 
 //[a, b, c], [1,2,3] → [a, b, c, 1,2,3]
 
-var lista = ["a","b","c"];
-var lista02 = [1,2,3];
+var listaA = ["a","b","c"];
+var listaB = [1,2,3];
 
 function juntarArray(array01,array02){
     var novoArray=[];
@@ -15,4 +15,4 @@ function juntarArray(array01,array02){
     return novoArray;
 }
 
-console.log(juntarArray(lista,lista02));
+console.log(juntarArray(listaA,listaB));

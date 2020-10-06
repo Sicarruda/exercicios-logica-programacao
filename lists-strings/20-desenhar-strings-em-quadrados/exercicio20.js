@@ -12,17 +12,17 @@
 var lista = ["Hello","World","in","a","frame","Caleidoscopio", "HGFDHSERDGHFDGERGRTRYTERGHRETHYFBS"];
 
 function desenharQuadrado(array){
-    console.log(desenharLinha(array));
-    var elemento = "";
+    var tamanhoMaiorElemento = acharMaiorElemento(array).length
+    console.log(gerarLinha(tamanhoMaiorElemento));
     for(var i = 0; i < array.length; i++){
-        elemento = array[i];
-        console.log("* " + colocarEspaco(elemento,acharMaiorElemento(array)) + " *");
+        var elemento = array[i];
+        console.log("* " + colocarEspaco(elemento, tamanhoMaiorElemento) + " *");
     }
     
-    console.log(desenharLinha(array));
+    console.log(gerarLinha(tamanhoMaiorElemento));
 }
 function acharMaiorElemento(array){
-    var maiorElemento = "";
+    var maiorElemento = array[0];
     for(var i = 0; i < array.length; i++){
         if(maiorElemento.length < array[i].length){
             maiorElemento = array[i];
@@ -31,18 +31,18 @@ function acharMaiorElemento(array){
     return maiorElemento;
 }
 
-function desenharLinha(array){
+function gerarLinha(tamanho){
     var linha = "*"
-    for(var j = 0; j <= acharMaiorElemento(array).length + 2; j++){
+    for(var j = 0; j <= tamanho + 2; j++){
         linha = linha + "*";
     }
     return linha;
 }
 
-function colocarEspaco(elemento, array){
+function colocarEspaco(elemento, numeroEspacos){
     var espaco = " ";
-    for(var i = 0; i <= array.length; i++){
-       if(elemento.length < array.length){
+    for(var i = 0; i <= numeroEspacos; i++){
+       if(elemento.length < numeroEspacos){
             elemento = elemento + espaco;
         }
     }
