@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br ">
+
+<head>
+    <meta charset="utf-8 ">
+    <link href="imitando-paint.css" rel='stylesheet' type="text/css ">
+</head>
+
+<body>
+
+    <canvas id="tela"></canvas>
+
+    <script>
+        var tela = document.getElementById("tela");
+        var c = tela.getContext("2d");
+        tela.width = 500;
+        tela.height = 500;
+
+        var desenhando = false;
+        var desenhandoCirculo = false;
+        var desenhandoQuadrado = false;
+        var x = 0;
+        var y = 0;
+        // muda cor
+        c.fillStyle = "purple";
+        c.fillRect(0, 0, 25, 25);
+
+        c.fillStyle = "green";
+        c.fillRect(25, 0, 25, 25);
+
+        c.fillStyle = "red";
+        c.fillRect(50, 0, 25, 25);
+
+        c.fillStyle = "blue";
+        c.fillRect(75, 0, 25, 25);
+
+        c.fillStyle = "black";
+        c.fillRect(100, 0, 25, 25);
+
+        c.fillStyle = "yellow";
+        c.fillRect(125, 0, 25, 25);
+        // faz circulo
+        c.fillStyle = "Black";
+        c.beginPath();
+        c.arc(175, 15, 10, 0, 2 * Math.PI);
+        c.fill();
+        //faz quadrado
+        c.beginPath();
+        c.moveTo(200, 0);
+        c.lineTo(200, 25);
+        c.lineTo(225, 25);
+        c.lineTo(225, 0);
+        c.closePath();
+        c.stroke();
+
+        var box = document.getElementById("tela");
+
+        box.addEventListener("mousedown", e => {
+            if (desenhandoCirculo === false && desenhandoQuadrado == false) {
+                x = e.offsetX;
+                y = e.offsetY;
+                desenhando = true;
+            } else if (desenhandoCirculo === true) {
+                x = e.offsetX;
+                y = e.offsetY;
+                desenharCirculo(e.offsetX, e.offsetY, x, y);
+            }
+        });
+        box.addEventListener("mousemove", e => {
+            if (desenhando === true) {
+                desenharLinha(c, x, y, e.offsetX, e.offsetY);
+                x = e.offsetX;
+                y = e.offsetY;
+            }
+        });
+        box.addEventListener("mouseup", e => {
+            if (desenhando === true) {
+                desenharLinha(c, x, y, e.offsetX, e.offsetY);
+                x = 0;
+                y = 0;
+                desenhando = false;
+            } else if (desenhandoCirculo === true) {
+                desenharCirculo(x, y, e.offsetX, e.offsetY, );
+                x = 0;
+                y = 0;
+                desenhandoCirculo = false;
+            }
+        });
+        box.addEventListener("mousedown", e => {
+            x = e.offsetX;
+            y = e.offsetY
+            if (x <= 24 && y <= 25) {
+                c.strokeStyle = "purple";
+            } else if (x <= 49 && x >= 25 && y <= 25) {
+                c.strokeStyle = "green";
+            } else if (x <= 74 && x >= 50 && y <= 25) {
+                c.strokeStyle = "red";
+            } else if (x <= 99 && x >= 75 && y <= 25) {
+                c.strokeStyle = "blue";
+            } else if (x <= 124 && x >= 100 && y <= 25) {
+                c.strokeStyle = "black";
+            } else if (x <= 149 && x >= 125 && y <= 25) {
+                c.strokeStyle = "yellow";
+            } else if (x <= 199 && x >= 150 && y <= 25) {
+                desenhandoCirculo = true;
+                desenhando = false;
+                desenhandoQuadrado = false;
+            } else if (x <= 224 && x >= 200 && y <= 25) {
+                desenhandoCirculo = false;
+                desenhando = false;
+                desenhandoQuadrado = true;
+            }
+        });
+
+        function desenharLinha(context, x1, y1, x2, y2) {
+            context.beginPath();
+            context.lineWidth = 1;
+            context.moveTo(x1, y1);
+            context.lineTo(x2, y2);
+            context.stroke();
+            context.closePath();
+        };
+
+        function desenharCirculo(x1, y1, x2, y2) {
+            var r = (x2 - x1) / 2;
+            var x = x1 + r;
+            var y = y1 + r;
+            c.beginPath();
+            c.arc(x, y, r, 0, 2 * Math.PI);
+            c.stroke();
+            c.closePath();
+        }
+    </script>
+
+</body>
+
+
+</html>

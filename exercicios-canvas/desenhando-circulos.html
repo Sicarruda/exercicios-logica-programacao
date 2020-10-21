@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<meta charset="utf-8">
+
+<body>
+
+    <canvas id="tela" width="600" height="400"></canvas>
+
+    <script>
+        function desenharCirculos(x, y, z) {
+            var tela = document.getElementById("tela");
+            var c = tela.getContext("2d");
+            if (z == 1) {
+                c.fillStyle = "blue";
+                c.beginPath();
+                c.arc(x, y, 15, 0, 2 * Math.PI);
+                c.fill();
+            } else {
+                c.fillStyle = "red";
+                c.beginPath();
+                c.arc(x, y, 15, 0, 2 * Math.PI);
+                c.fill();
+            }
+        }
+        var box = document.getElementById("tela");
+
+        var x = (e) => {
+            console.log(e.pageX, e.pageY, e.buttons);
+            desenharCirculos(e.pageX, e.pageY, e.buttons);
+        }
+        box.addEventListener("mousedown", x);
+    </script>
+
+</body>
+
+</html>

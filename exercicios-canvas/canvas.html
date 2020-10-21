@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<meta charset="utf-8">
+
+<body>
+    <canvas id="tela" width="600" height="400"></canvas>
+
+    <script>
+        function desenhaQuadradoVermelho(x, y) {
+            var tela = document.getElementById("tela");
+            var c = tela.getContext("2d");
+            c.fillStyle = "red";
+            c.fillRect(x, y, 50, 50);
+            c.strokeStyle = "black";
+            c.strokeRect(x, y, 50, 50);
+        }
+
+        function desenhaQuadradoVerde(x, y) {
+            var tela = document.getElementById("tela");
+            var c = tela.getContext("2d");
+            c.fillStyle = "green";
+            c.fillRect(x, y, 50, 50);
+            c.strokeStyle = "black";
+            c.strokeRect(x, y, 50, 50);
+        }
+
+        function desenharCirculosAzuis(x, y) {
+            var tela = document.getElementById("tela");
+            var c = tela.getContext("2d");
+            c.fillStyle = "blue";
+            c.beginPath();
+            c.arc(x, y, 25, 0, 2 * Math.PI);
+            c.fill();
+        }
+        //função que une as duas funções de desenhar quadrado
+        function desenharQuadrado(x, y, cor) {
+            var tela = document.getElementById("tela");
+            var c = tela.getContext("2d");
+            c.fillStyle = cor;
+            c.fillRect(x, y, 50, 50);
+            c.strokeStyle = "black";
+            c.strokeRect(x, y, 50, 50);
+        }
+
+        for (var x = 0; x < 600; x = x + 50) {
+            desenharQuadrado(x, 0, "green");
+            desenharQuadrado(x, 50, "red");
+            desenharCirculosAzuis(x + 25, 100);
+        }
+    </script>
+
+</body>
+
+</html>

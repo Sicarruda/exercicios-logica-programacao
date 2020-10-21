@@ -1,0 +1,21 @@
+!DOCTYPE html>
+<html lang="pt-br">
+<meta charset="utf-8">
+
+<body>
+    <canvas id="tela" width="600" height="400"></canvas>
+
+    <script>
+        var tela = document.getElementById("tela");
+        var c = tela.getContext("2d");
+        c.fillStyle = "red";
+        c.fillRect(200, 0, 600, 200);
+        c.fillStyle = "green";
+        c.fillRect(200, 200, 600, 300);
+        c.fillStyle = "white";
+        c.fillRect(0, 0, 100, 400);
+    </script>
+
+</body>
+
+</html>
