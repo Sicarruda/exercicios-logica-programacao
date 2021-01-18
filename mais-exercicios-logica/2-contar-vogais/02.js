@@ -21,7 +21,7 @@ function contarVogal1(string) {
 
 //jeito 02
 function contarVogal2(string) {
-  var controle = -1;
+    var controle = -1;
   var vogal = 0;
   while (typeof string[++controle] !== "undefined") {
     if (
@@ -37,3 +37,4 @@ function contarVogal2(string) {
   return vogal;
 }
 
+function testes()
