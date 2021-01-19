@@ -3,7 +3,7 @@
 //um jeito
 function contarCaracteres1(string) {
   var controle = 0;
-  criarAssert(string);
+  //criarAssert(string);
   for (var i = 0; ; i++) {
     if (typeof string[i] === "undefined") {
       break;
@@ -17,7 +17,7 @@ function contarCaracteres1(string) {
 //dois jeitos
 function contarCaracteres2(string) {
   var count = 0;
-  criarAssert(string);
+  //criarAssert(string);
   while (typeof string[count] !== "undefined") {
     count += 1;
   }
@@ -27,11 +27,11 @@ function contarCaracteres2(string) {
 // três jeitos
 function contarCaracteres3(string) {
   var count = -1;
-  criarAssert(string);
+  //criarAssert(string);
   while (typeof string[++count] !== "undefined");
   return count;
 }
-
+/*
 function testes() {
   contarCaracteres3(null);
   console.assert(1 == 1, "1 sempre é igual a 1");
@@ -46,8 +46,24 @@ function criarAssert(string) {
   if (string == null || typeof string == "undefined") {
     throw new Error("lalal ");
   }
+}*/
+
+function teste() {
+  test("contarCaracteres1: funciona corretamente", () => {
+    jAssert(contarCaracteres1("jessica") === 7, "para string de vários caracteres");
+    jAssert(contarCaracteres1("j") === 1, "para string de um caracter");
+    jAssert(contarCaracteres1("") === 0, "para string vazia");
+  });
+  test("contarCaracteres2: funciona corretamente", () => {
+    jAssert(contarCaracteres2("jessica") === 7, "para string de vários caracteres");
+    jAssert(contarCaracteres2("j") === 1, "para string de um caracter");
+    jAssert(contarCaracteres2("") === 0, "para string vazia");
+  });
+  test("contarCaracteres3: funciona corretamente", () => {
+    jAssert(contarCaracteres3("jessica") === 7, "para string de vários caracteres");
+    jAssert(contarCaracteres3("j") === 1, "para string de um caracter");
+    jAssert(contarCaracteres3("") === 0, "para string vazia");
+  });
 }
 
-console.log(contarCaracteres1("maisu"));
-console.log(contarCaracteres2("maisu"));
-console.log(contarCaracteres3("maisu"));
+teste();
