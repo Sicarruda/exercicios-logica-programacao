@@ -1,8 +1,5 @@
 //Faça um programa para comparar se duas strings são iguais.
 
-var listaA = [1, 2, undefined, 4];
-var listaB = [1, 2, undefined, 4];
-
 function compararListas(listaA, listaB) {
 
   var listasIguais = true;
@@ -17,8 +14,20 @@ function compararListas(listaA, listaB) {
     }
   }
   if (listasIguais === true) {
-    return console.log(`${listaA} é igual a ${listaB}`);
+    console.log(`${listaA} é igual a ${listaB}`);
+    return true;
   }
 }
 
-compararListas(listaA, listaB);
+function teste(){
+  test("compararListas: funciona corretamente", ()=>{
+    jAssert(compararListas([1,2,3],[1,2,3]) === true, "para listas de numeros");
+    jAssert(compararListas(["abc",123,"mnb",undefined],["abc",123,"mnb",undefined]) === true, "para listas mistas");
+    jAssert(compararListas(["abc","bfe"],["abc","bfe"]) === true,"para listas de string");
+    jAssert(compararListas([],[])===true, "para listas vazias");
+
+  });
+}
+
+teste();
+
