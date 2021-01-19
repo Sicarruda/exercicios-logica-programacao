@@ -21,7 +21,7 @@ function contarVogal1(string) {
 
 //jeito 02
 function contarVogal2(string) {
-    var controle = -1;
+  var controle = -1;
   var vogal = 0;
   while (typeof string[++controle] !== "undefined") {
     if (
@@ -37,4 +37,21 @@ function contarVogal2(string) {
   return vogal;
 }
 
-function testes()
+function teste() {
+  test("contarVogal1: funciona corretamente", () => {
+    jAssert(contarVogal1("aeiou") === 5, "para strings com varias vogais");
+    jAssert(contarVogal1("kjisdf") === 1, "para strings com uma vogal");
+    jAssert(contarVogal1("lkjsdf") === 0, "para strings sem vogais");
+    jAssert(contarVogal1(65465) === 0, "para numeros");
+    jAssert(contarVogal1("") === 0, "para strings vazias");
+  });
+  test("contarVogal2: funciona corretamente", () => {
+    jAssert(contarVogal2("aeiou") === 5, "para strings com varias vogais");
+    jAssert(contarVogal2("kjisdf") === 1, "para strings com uma vogal");
+    jAssert(contarVogal2("lkjsdf") === 0, "para strings sem vogais");
+    jAssert(contarVogal2(65465) === 0, "para numeros");
+    jAssert(contarVogal2("") === 0, "para strings vazias");
+  });
+}
+
+teste();
