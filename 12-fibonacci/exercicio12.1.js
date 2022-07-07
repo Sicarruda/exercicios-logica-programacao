@@ -3,6 +3,7 @@ function contaAte(inicial,final){
     if(inicial < final){
         contaAte(inicial+1,final);
     }
+    //colocando o console.log aqui inverte-se a contagem dos números.
 }
 
 

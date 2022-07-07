@@ -11,84 +11,15 @@
     <canvas id="tela"></canvas>
 
     <script>
-        var tela = document.getElementById("tela");
-        var c = tela.getContext("2d");
-        tela.width = 500;
-        tela.height = 500;
-
+        var box = document.getElementById("tela");
+        var c = box.getContext("2d");
         var desenhando = false;
         var desenhandoCirculo = false;
         var desenhandoQuadrado = false;
         var x = 0;
         var y = 0;
-        // muda cor
-        c.fillStyle = "purple";
-        c.fillRect(0, 0, 25, 25);
 
-        c.fillStyle = "green";
-        c.fillRect(25, 0, 25, 25);
-
-        c.fillStyle = "red";
-        c.fillRect(50, 0, 25, 25);
-
-        c.fillStyle = "blue";
-        c.fillRect(75, 0, 25, 25);
-
-        c.fillStyle = "black";
-        c.fillRect(100, 0, 25, 25);
-
-        c.fillStyle = "yellow";
-        c.fillRect(125, 0, 25, 25);
-        // faz circulo
-        c.fillStyle = "Black";
-        c.beginPath();
-        c.arc(175, 15, 10, 0, 2 * Math.PI);
-        c.fill();
-        //faz quadrado
-        c.beginPath();
-        c.moveTo(200, 0);
-        c.lineTo(200, 25);
-        c.lineTo(225, 25);
-        c.lineTo(225, 0);
-        c.closePath();
-        c.stroke();
-
-        var box = document.getElementById("tela");
-
-        box.addEventListener("mousedown", e => {
-            if (desenhandoCirculo === false && desenhandoQuadrado == false) {
-                x = e.offsetX;
-                y = e.offsetY;
-                desenhando = true;
-            } else if (desenhandoCirculo === true) {
-                x = e.offsetX;
-                y = e.offsetY;
-                desenharCirculo(e.offsetX, e.offsetY, x, y);
-            }
-        });
-        box.addEventListener("mousemove", e => {
-            if (desenhando === true) {
-                desenharLinha(c, x, y, e.offsetX, e.offsetY);
-                x = e.offsetX;
-                y = e.offsetY;
-            }
-        });
-        box.addEventListener("mouseup", e => {
-            if (desenhando === true) {
-                desenharLinha(c, x, y, e.offsetX, e.offsetY);
-                x = 0;
-                y = 0;
-                desenhando = false;
-            } else if (desenhandoCirculo === true) {
-                desenharCirculo(x, y, e.offsetX, e.offsetY, );
-                x = 0;
-                y = 0;
-                desenhandoCirculo = false;
-            }
-        });
-        box.addEventListener("mousedown", e => {
-            x = e.offsetX;
-            y = e.offsetY
+        function escolherFeramenta(x, y) {
             if (x <= 24 && y <= 25) {
                 c.strokeStyle = "purple";
             } else if (x <= 49 && x >= 25 && y <= 25) {
@@ -110,7 +41,95 @@
                 desenhando = false;
                 desenhandoQuadrado = true;
             }
-        });
+        };
+
+        function gerenciamnetoMouseDown(e) {
+            x = e.offsetX;
+            y = e.offsetY;
+            if (desenhandoCirculo === false && desenhandoQuadrado == false) {
+                desenhando = true;
+            } else if (desenhandoCirculo === true) {
+                desenharCirculo(e.offsetX, e.offsetY, x, y);
+            } else if (desenhandoQuadrado === true) {
+                desenharQuadrado(e.offsetX, e.offsetY, 0, 0);
+            }
+        };
+
+        function gerenciamnetoMouseMove(e) {
+            if (desenhando === true) {
+                desenharLinha(c, x, y, e.offsetX, e.offsetY);
+                x = e.offsetX;
+                y = e.offsetY;
+            }
+        };
+
+        function gerenciamnetoMouseUp(e) {
+            if (desenhando === true) {
+                desenharLinha(c, x, y, e.offsetX, e.offsetY);
+                x = 0;
+                y = 0;
+                desenhando = false;
+            } else if (desenhandoCirculo === true) {
+                desenharCirculo(x, y, e.offsetX, e.offsetY);
+                x = 0;
+                y = 0;
+                desenhandoCirculo = false;
+            } else if (desenhandoQuadrado === true) {
+                desenharQuadrado(x, y, e.offsetX, e.offsetY);
+                x = 0;
+                y = 0;
+                desenhandoQuadrado = false;
+            }
+        };
+
+        function desenhaCaixaFerramentas() {
+            // muda cor
+            c.fillStyle = "purple";
+            c.fillRect(0, 0, 25, 25);
+
+            c.fillStyle = "green";
+            c.fillRect(25, 0, 25, 25);
+
+            c.fillStyle = "red";
+            c.fillRect(50, 0, 25, 25);
+
+            c.fillStyle = "blue";
+            c.fillRect(75, 0, 25, 25);
+
+            c.fillStyle = "black";
+            c.fillRect(100, 0, 25, 25);
+
+            c.fillStyle = "yellow";
+            c.fillRect(125, 0, 25, 25);
+            // faz circulo
+            c.fillStyle = "Black";
+            c.beginPath();
+            c.arc(175, 15, 10, 0, 2 * Math.PI);
+            c.fill();
+            //faz quadrado
+            c.beginPath();
+            c.moveTo(200, 0);
+            c.lineTo(200, 25);
+            c.lineTo(225, 25);
+            c.lineTo(225, 0);
+            c.closePath();
+            c.stroke();
+        }
+
+        function gerenciamnetoClik(e) {
+            escolherFeramenta(e.offsetX, e.offsetY);
+        }
+
+        function setupCanvas() {
+            box.width = 500;
+            box.height = 500;
+
+            box.addEventListener("mousedown", gerenciamnetoMouseDown);
+            box.addEventListener("mousemove", gerenciamnetoMouseMove);
+            box.addEventListener("mouseup", gerenciamnetoMouseUp);
+            box.addEventListener("click", gerenciamnetoClik);
+
+        };
 
         function desenharLinha(context, x1, y1, x2, y2) {
             context.beginPath();
@@ -123,13 +142,30 @@
 
         function desenharCirculo(x1, y1, x2, y2) {
             var r = (x2 - x1) / 2;
-            var x = x1 + r;
-            var y = y1 + r;
+            var x = 0;
+            var y = 0;
+            if (r < 0) {
+                r = Math.abs(r);
+                x = x1 - r;
+                y = y1 - r;
+            } else {
+                x = x1 + r;
+                y = y1 + r;
+            }
             c.beginPath();
             c.arc(x, y, r, 0, 2 * Math.PI);
             c.stroke();
             c.closePath();
-        }
+        };
+
+        function desenharQuadrado(x, y, altura, largura, ) {
+            altura = Math.abs(y - altura);
+            largura = Math.abs(x - largura);
+            c.fillRect(x, y, altura, largura);
+        };
+
+        setupCanvas();
+        desenhaCaixaFerramentas();
     </script>
 
 </body>
